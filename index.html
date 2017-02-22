@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BubbleHead</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+
+	<!-- Play button -->
+	<script type="text/x-template" id="home-template">
+		<g>
+			<foreignObject x="700" y="300" width="90" height="100">
+				<a class="button is-primary is-large is-inverted" href="#" v-on:click="play">Play</a>
+			</foreignObject>
+		</g>
+	</script>
+
+  	<!-- Bubble component -->
+    <script type="text/x-template" id="bubble-template">
+	  <g >
+		  <animateTransform attributeType="XML" attributeName="transform" 
+		  type="translate" from="100, 300" to="100,-600" dur="20s" fill="freeze" repeatCount="0"></animateTransform>
+		  <circle :cx="circleXCoordinate" cy="500" r="100"></circle>
+		  <text font-size="25" font-weight="bold" font-family="Verdana" :x="circleXCoordinate - 40" y="490">{{num1}} {{operator}} {{num2}}</text>
+		  <text font-size="25" font-weight="bold" font-family="Verdana" :x="circleXCoordinate - 70" y="520">=</text>
+		  <foreignObject :x="circleXCoordinate - 40" y="500" width="90" height="100">
+		  	<!--<div class="ansText" contenteditable="true" ref="answerBox" @keyUp.enter="calculate"></div>-->
+		  	<input type="text" @keyup.enter="calculate" v-model="ans">
+		  </foreignObject>	  
+	  </g>
+	</script>
+
+	<!-- Main canvas -->
+	<svg id="root">
+	  <defs>
+	    <linearGradient id="grad1" x1="0%" y1="90%" x2="100%" y2="0%">
+	      <stop offset="20%" stop-color="#FFF" />
+	      <stop offset="70%" stop-color="#a0e3e8" />
+	    </linearGradient>
+	  </defs>
+	  <component :is="currentView" v-on:play="currentView='bubble'" v-for="count in counter"></component>
+	</svg>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="js/numbersense.js"></script>
+  </body>
+</html>
