@@ -20,28 +20,23 @@ var Bubble = Vue.component('bubble', {
 			num2 : Math.floor(Math.random() * (99 - 1 + 1) + 1),
 		    operator : '+',
 		    ans: '',
-		    show: true
+		    showBubble: true
 		}
 	},
 	computed: {
 		circleXCoordinate : function() {
 			return Math.floor(Math.random() * (900 - 0 + 1) + 0);
-		},
-		circleYCoordinate: function() {
-			return 300;
 		}
 	},
 	methods: {
 		focus: function() {
-			Vue.nextTick(function () {
-			  this.$$.ans.focus();
-			});
+			console.log("on focus");
 		},
 		calculate: function() {
 			if(this.operator == '+') {
 				if(this.num1 + this.num2 == this.ans) {
-					this.show = false;
-					console.log('correct');
+					this.showBubble = false;
+					console.log('correct answer');
 				}
 			}
 		}
