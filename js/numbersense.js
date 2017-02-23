@@ -1,4 +1,12 @@
 
+Vue.directive('focus', {
+  update: function (el, binding) {
+  	if(binding.value) {
+  		el.focus()
+  	}
+  }
+})
+
 var Home = Vue.component('home', {
 	name:'home',
 	template: '#home-template',
@@ -21,7 +29,8 @@ var Bubble = Vue.component('bubble', {
 			num2 : Math.floor(Math.random() * (99 - 1 + 1) + 1),
 		    operator : '+',
 		    ans: '',
-		    showBubble: true
+		    showBubble: true,
+		    focus:false
 		}
 	},
 	computed: {

@@ -22,14 +22,14 @@
   	<!-- Bubble component -->
     <script type="text/x-template" id="bubble-template">
       <transition name="fade">
-	  <g v-if="showBubble" @click="focus" @keyup.40="focus">
+	  <g v-if="showBubble" @click="focus=true" @keyup.40="focus">
 		  <animateTransform attributeType="XML" attributeName="transform" 
 		  type="translate" from="100, 300" to="100,-1000" dur="20s" fill="freeze" :begin="index" repeatCount="0"></animateTransform>
 		  <circle :cx="circleXCoordinate" cy="900" r="100"></circle>
 		  <text font-size="25" font-weight="bold" font-family="Verdana" :x="circleXCoordinate - 40" y="890">{{num1}} {{operator}} {{num2}}</text>
 		  <text font-size="25" font-weight="bold" font-family="Verdana" :x="circleXCoordinate - 70" y="920">=</text>
 		  <foreignObject :x="circleXCoordinate - 40" y="900" width="90" height="100">
-		  	<input type="text" @keyup.enter="calculate" v-model="ans">
+		  	<input type="text" @keyup.enter="calculate" v-model="ans" v-focus="focus" @blur="focus=false">
 		  </foreignObject>	  
 	  </g>
 	  </transition>
