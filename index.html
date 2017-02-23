@@ -29,7 +29,6 @@
 		  <text font-size="25" font-weight="bold" font-family="Verdana" :x="circleXCoordinate - 40" y="890">{{num1}} {{operator}} {{num2}}</text>
 		  <text font-size="25" font-weight="bold" font-family="Verdana" :x="circleXCoordinate - 70" y="920">=</text>
 		  <foreignObject :x="circleXCoordinate - 40" y="900" width="90" height="100">
-		  	<!--<div class="ansText" contenteditable="true" ref="answerBox" @keyUp.enter="calculate"></div>-->
 		  	<input type="text" @keyup.enter="calculate" v-model="ans">
 		  </foreignObject>	  
 	  </g>
