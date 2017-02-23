@@ -31,10 +31,11 @@ text {
 input[type=text] {
     border: none;
     height: 30px;
+    width: 100px;
     border-bottom: 2px dashed #EEE;
     background-color: transparent;
     color: white;
-    font-size: 25; 
+    font-size: 1.6em; 
 	font-family: "Verdana"; 
 	font-weight: bold; 
 }
@@ -42,7 +43,7 @@ input[type=text] {
 .fade-leave-active {
   transition: opacity .5s
 }
-.fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+.fade-leave-to {
   opacity: 0
 }
 
