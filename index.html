@@ -21,7 +21,8 @@
 
   	<!-- Bubble component -->
     <script type="text/x-template" id="bubble-template">
-	  <g >
+      <transition name="fade">
+	  <g v-if="show">
 		  <animateTransform attributeType="XML" attributeName="transform" 
 		  type="translate" from="100, 300" to="100,-600" dur="20s" fill="freeze" repeatCount="0"></animateTransform>
 		  <circle :cx="circleXCoordinate" cy="500" r="100"></circle>
@@ -32,6 +33,7 @@
 		  	<input type="text" @keyup.enter="calculate" v-model="ans">
 		  </foreignObject>	  
 	  </g>
+	  </transition>
 	</script>
 
 	<!-- Main canvas -->

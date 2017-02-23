@@ -19,7 +19,8 @@ var Bubble = Vue.component('bubble', {
 			num1 : Math.floor(Math.random() * (99 - 1 + 1) + 1),
 			num2 : Math.floor(Math.random() * (99 - 1 + 1) + 1),
 		    operator : '+',
-		    ans: ''
+		    ans: '',
+		    show: true
 		}
 	},
 	computed: {
@@ -39,6 +40,7 @@ var Bubble = Vue.component('bubble', {
 		calculate: function() {
 			if(this.operator == '+') {
 				if(this.num1 + this.num2 == this.ans) {
+					this.show = false;
 					console.log('correct');
 				}
 			}
