@@ -14,6 +14,7 @@ var Bubble = Vue.component('bubble', {
 
   	name:'bubble',
 	template: '#bubble-template',
+	props: ['index'],
 	data: function() {
 		return {
 			num1 : Math.floor(Math.random() * (99 - 1 + 1) + 1),
