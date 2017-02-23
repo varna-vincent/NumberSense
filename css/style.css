@@ -39,7 +39,14 @@ input[type=text] {
 	font-weight: bold; 
 }
 
-.ansText {
+.fade-leave-active {
+  transition: opacity .5s
+}
+.fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0
+}
+
+/*.ansText {
 	font-size: 25; 
 	font-family: "Verdana"; 
 	font-weight: bold; 
@@ -53,4 +60,4 @@ input[type=text] {
 
 [contenteditable="true"]:focus { 
 	outline: 2px dashed #0090D2; 
-}
+}*/
