@@ -14,19 +14,19 @@
 	<!-- Play button -->
 	<script type="text/x-template" id="home-template">
 		<g>
-			<foreignObject x="650" y="300" width="90" height="100">
+			<foreignObject x="650" y="300" width="90" height="100">				
 				<a class="button is-primary is-large is-inverted" href="#" v-on:click="play">Play</a>
 			</foreignObject>
 		</g>
 	</script>
 	<!-- Bubbles canvas -->
 	<script type="text/x-template" id="bubbles-template">
-	  <g  v-on:correctAnswer="increaseScore">
+	  <g>
 		  <foreignObject x="15" y="15" width="70" height="70">
 		  	<img src="css/heart.png" alt="Star" height="50" width="50"></img>
 		  </foreignObject>
 		  <text font-size="25" font-weight="bold" font-family="Verdana" x="75" y="50">{{score}}</text>
-	  	  <bubble v-for="count in counter" :index='count * 3'></bubble>
+	  	  <bubble v-for="count in counter" :index='count * 3' v-on:correctAnswer="increaseScore"></bubble>
 	  </g>
 	</script>
   	<!-- Bubble component -->
