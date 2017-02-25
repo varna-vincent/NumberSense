@@ -41,16 +41,38 @@ var Bubble = Vue.component('bubble', {
 	data: function() {
 		return {
 			num1 : Math.floor(Math.random() * (99 - 1 + 1) + 1),
-			num2 : Math.floor(Math.random() * (99 - 1 + 1) + 1),
-		    operator : '+',
+		    operators : ['+', '-', '*', '/', '%'],
+		    circleXCoordinate: Math.floor(Math.random() * (900 - 0 + 1) + 0),
 		    ans: '',
 		    showBubble: true,
 		    focus:false
 		}
 	},
 	computed: {
-		circleXCoordinate : function() {
-			return Math.floor(Math.random() * (900 - 0 + 1) + 0);
+		operator : function() {
+			let max = 0, min = 0, level = 2;
+			if(level == 1) {
+				max = 2; 
+			} else if(level == 2) {
+				max = 4;
+			} else {
+				max = 5;
+			}
+			return this.operators[ Math.floor(Math.random() * max) + min ];
+		},
+		num2: function() {
+			let max, min = 0;
+			if(this.operator == '*' || this.operator == '/') {
+				max = 11;
+				min = 1;
+			} else if(this.operator == '%') {
+				max = 11;
+				min = 0;
+			}
+			else {
+				max = 100;
+			}
+			return Math.floor(Math.random() * max) + min;
 		}
 	},
 	methods: {
@@ -59,11 +81,20 @@ var Bubble = Vue.component('bubble', {
 		},
 		calculate: function() {
 			if(this.operator == '+') {
-				if(this.num1 + this.num2 == this.ans) {
-					this.showBubble = false;
-					this.$emit('correctAnswer');
-				}
+				if(this.num1 + this.num2 == this.ans) { this.popBubble(); }
+			} else if(this.operator == '-') {
+				if(this.num1 - this.num2 == this.ans) { this.popBubble(); }
+			} else if(this.operator == '*') {
+				if(this.num1 * this.num2 == this.ans) { this.popBubble(); }
+			} else if(this.operator == '/') {
+				if(this.num1 / this.num2 == this.ans) { this.popBubble(); }
+			} else if(this.operator == '%') {
+				if(this.num1 % this.num2 == this.ans) { this.popBubble(); }
 			}
+		},
+		popBubble: function() {
+			this.showBubble = false;
+			this.$emit('correctAnswer');
 		}
 	}
 	
