@@ -17,6 +17,21 @@ var Home = Vue.component('home', {
 	}
 });
 
+var Bubbles = Vue.component('bubbles', {
+	name: 'bubbles',
+	template: '#bubbles-template',
+	data: function() {
+		return {
+    		counter: [0,1,2,3,4],
+			score: 0
+		}
+	},
+	methods: {
+		increaseScore: function() {
+			this.score += 100;
+		}
+	}
+})
 
 var Bubble = Vue.component('bubble', {
 
@@ -46,7 +61,7 @@ var Bubble = Vue.component('bubble', {
 			if(this.operator == '+') {
 				if(this.num1 + this.num2 == this.ans) {
 					this.showBubble = false;
-					console.log('correct answer');
+					this.$emit('correctAnswer');
 				}
 			}
 		}
@@ -58,8 +73,7 @@ var Bubble = Vue.component('bubble', {
 var Root = new Vue({
   el: '#root',
   data: {
-    currentView: Home,
-    counter: [0,1,2,3,4]
+    currentView: Home
   },
   components: {
   	'home': Home,

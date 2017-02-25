@@ -5,6 +5,7 @@
     <title>BubbleHead</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="css/favicon.ico">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
@@ -18,7 +19,16 @@
 			</foreignObject>
 		</g>
 	</script>
-
+	<!-- Bubbles canvas -->
+	<script type="text/x-template" id="bubbles-template">
+	  <g  v-on:correctAnswer="increaseScore">
+		  <foreignObject x="15" y="15" width="70" height="70">
+		  	<img src="css/heart.png" alt="Star" height="50" width="50"></img>
+		  </foreignObject>
+		  <text font-size="25" font-weight="bold" font-family="Verdana" x="75" y="50">{{score}}</text>
+	  	  <bubble v-for="count in counter" :index='count * 3'></bubble>
+	  </g>
+	</script>
   	<!-- Bubble component -->
     <script type="text/x-template" id="bubble-template">
       <transition name="fade">
@@ -34,7 +44,7 @@
 	  </g>
 	  </transition>
 	</script>
-
+	
 	<!-- Main canvas -->
 	<svg id="root">
 	  <defs>
@@ -43,7 +53,7 @@
 	      <stop offset="70%" stop-color="#a0e3e8" />
 	    </linearGradient>
 	  </defs>
-	  <component :is="currentView" v-on:play="currentView='bubble'" v-for="count in counter" :index='count * 3'></component>
+	  <component :is="currentView" v-on:play="currentView='bubbles'" ></component>
 	</svg>
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
