@@ -22,7 +22,7 @@ var Bubbles = Vue.component('bubbles', {
 	template: '#bubbles-template',
 	data: function() {
 		return {
-    		counter: [0,1,2,3,4],
+    		counter: [0,1,2,3,4,5,6,7,8,9],
 			score: 0
 		}
 	},
@@ -40,9 +40,8 @@ var Bubble = Vue.component('bubble', {
 	props: ['index'],
 	data: function() {
 		return {
-			num1 : Math.floor(Math.random() * (99 - 1 + 1) + 1),
 		    operators : ['+', '-', '*', '/', '%'],
-		    circleXCoordinate: Math.floor(Math.random() * (900 - 0 + 1) + 0),
+		    circleXCoordinate: Math.floor(Math.random() * 901) + 0,
 		    ans: '',
 		    showBubble: true,
 		    focus:false
@@ -50,7 +49,7 @@ var Bubble = Vue.component('bubble', {
 	},
 	computed: {
 		operator : function() {
-			let max = 0, min = 0, level = 2;
+			let max = 0, min = 0, level = 3;
 			if(level == 1) {
 				max = 2; 
 			} else if(level == 2) {
@@ -65,11 +64,16 @@ var Bubble = Vue.component('bubble', {
 			if(this.operator == '*' || this.operator == '/') {
 				max = 11;
 				min = 1;
-			} else if(this.operator == '%') {
-				max = 11;
-				min = 0;
+			} else {
+				max = 100;
 			}
-			else {
+			return Math.floor(Math.random() * max) + min;
+		},
+		num1: function() {
+			let max, min = 0;
+			if(this.operator == '%') {
+				max = 11;
+			} else {
 				max = 100;
 			}
 			return Math.floor(Math.random() * max) + min;
@@ -87,9 +91,11 @@ var Bubble = Vue.component('bubble', {
 			} else if(this.operator == '*') {
 				if(this.num1 * this.num2 == this.ans) { this.popBubble(); }
 			} else if(this.operator == '/') {
-				if(this.num1 / this.num2 == this.ans) { this.popBubble(); }
+				let quotient = this.num1 / this.num2;
+				if(quotient == this.ans || Math.ceil(quotient).toFixed(1) == this.ans || Math.ceil(quotient).toFixed(2) == this.ans) { this.popBubble(); }
 			} else if(this.operator == '%') {
-				if(this.num1 % this.num2 == this.ans) { this.popBubble(); }
+				let percent = (this.num1 / 100) * this.num2;
+				if(percent == this.ans || Math.ceil(percent).toFixed(1) == this.ans || Math.ceil(percent).toFixed(2) == this.ans) { this.popBubble(); }
 			}
 		},
 		popBubble: function() {
