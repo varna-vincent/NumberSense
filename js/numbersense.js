@@ -7,37 +7,37 @@ Vue.directive('focus', {
   }
 })
 
-var Home = Vue.component('home', {
-	name:'home',
-	template: '#home-template',
-	methods: {
-		play: function() {
-			this.$emit('play')
-		}
-	}
-});
+// var Home = Vue.component('home', {
+// 	name:'home',
+// 	template: '#home-template',
+// 	methods: {
+// 		play: function() {
+// 			this.$emit('play')
+// 		}
+// 	}
+// });
 
-var Bubbles = Vue.component('bubbles', {
-	name: 'bubbles',
-	template: '#bubbles-template',
-	data: function() {
-		return {
-    		counter: [0,1,2,3,4,5,6,7,8,9],
-			score: 0
-		}
-	},
-	methods: {
-		increaseScore: function() {
-			this.score += 100;
-		}
-	}
-})
+// var Bubbles = Vue.component('bubbles', {
+// 	name: 'bubbles',
+// 	template: '#bubbles-template',
+// 	data: function() {
+// 		return {
+//     		counter: [0,1,2,3,4,5,6,7,8,9],
+// 			score: 0
+// 		}
+// 	},
+// 	methods: {
+// 		increaseScore: function() {
+// 			this.score += 100;
+// 		}
+// 	}
+// })
 
 var Bubble = Vue.component('bubble', {
 
   	name:'bubble',
 	template: '#bubble-template',
-	props: ['index'],
+	props: ['index', 'level'],
 	data: function() {
 		return {
 		    operators : ['+', '-', '*', '/', '%'],
@@ -49,10 +49,10 @@ var Bubble = Vue.component('bubble', {
 	},
 	computed: {
 		operator : function() {
-			let max = 0, min = 0, level = 3;
-			if(level == 1) {
+			let max = 0, min = 0;
+			if(this.level == 1) {
 				max = 2; 
-			} else if(level == 2) {
+			} else if(this.level == 2) {
 				max = 4;
 			} else {
 				max = 5;
@@ -110,11 +110,20 @@ var Bubble = Vue.component('bubble', {
 var Root = new Vue({
   el: '#root',
   data: {
-    currentView: Home
+    // currentView: Home,
+    isPlay: false,
+    counter: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    score: 0,
+    level: ''
   },
   components: {
-  	'home': Home,
+  	// 'home': Home,
   	'bubble': Bubble
+  },
+  methods: {
+	increaseScore: function() {
+		this.score += 100;
+	}
   }
 })
 
