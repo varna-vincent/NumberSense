@@ -7,31 +7,22 @@ Vue.directive('focus', {
   }
 })
 
-// var Home = Vue.component('home', {
-// 	name:'home',
-// 	template: '#home-template',
-// 	methods: {
-// 		play: function() {
-// 			this.$emit('play')
-// 		}
-// 	}
-// });
-
-// var Bubbles = Vue.component('bubbles', {
-// 	name: 'bubbles',
-// 	template: '#bubbles-template',
-// 	data: function() {
-// 		return {
-//     		counter: [0,1,2,3,4,5,6,7,8,9],
-// 			score: 0
-// 		}
-// 	},
-// 	methods: {
-// 		increaseScore: function() {
-// 			this.score += 100;
-// 		}
-// 	}
-// })
+var Bubbles = Vue.component('bubbles', {
+	name: 'bubbles',
+	template: '#bubbles-template',
+	props: ['level'],
+	data: function() {
+		return {
+    		counter: [0,1,2,3,4,5,6,7,8,9],
+			score: 0
+		}
+	},
+	methods: {
+		increaseScore: function() {
+			this.score += 100;
+		}
+	}
+})
 
 var Bubble = Vue.component('bubble', {
 
@@ -80,9 +71,6 @@ var Bubble = Vue.component('bubble', {
 		}
 	},
 	methods: {
-		focus: function() {
-			console.log("on focus");
-		},
 		calculate: function() {
 			if(this.operator == '+') {
 				if(this.num1 + this.num2 == this.ans) { this.popBubble(); }
@@ -110,20 +98,12 @@ var Bubble = Vue.component('bubble', {
 var Root = new Vue({
   el: '#root',
   data: {
-    // currentView: Home,
     isPlay: false,
-    counter: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    score: 0,
     level: ''
   },
   components: {
-  	// 'home': Home,
+  	'bubbles': Bubbles,
   	'bubble': Bubble
-  },
-  methods: {
-	increaseScore: function() {
-		this.score += 100;
-	}
   }
 })
 
