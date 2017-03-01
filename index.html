@@ -10,16 +10,52 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
+  	<div id="root">
+  		<div id="outerDiv" class="container" v-if="!isPlay">
+	      <div class="box">
+	        <p class="control">
+	          <label class="radio">
+	            <input type="radio" id="beginner" value="1" v-model="level">
+	            Beginner
+	          </label>
+	          <label class="radio">
+	            <input type="radio" id="intermediate" value="2" v-model="level">
+	            Intermediate
+	          </label>
+	          <label class="radio">
+	            <input type="radio" id="expert" value="3" v-model="level">
+	            Expert
+	          </label>
+	        </p>
+	        <p class="control">
+	          <button class="button is-primary is-large" v-on:click="isPlay = true">Play</button>
+	        </p>
+	      </div>
+	    </div>
+	    <svg v-if="isPlay">
+	      <defs>
+	        <linearGradient id="grad1" x1="0%" y1="90%" x2="100%" y2="0%">
+	          <stop offset="20%" stop-color="#FFF" />
+	          <stop offset="70%" stop-color="#a0e3e8" />
+	        </linearGradient>
+	      </defs>
+	      <foreignObject x="15" y="15" width="70" height="70">
+	        <img src="css/heart.png" alt="Star" height="50" width="50"></img>
+	      </foreignObject>
+	      <text font-size="25" font-weight="bold" font-family="Verdana" x="75" y="50">{{score}}</text>
+	      <bubble v-for="count in counter" :index='count * 3' v-on:correctAnswer="increaseScore" :level="level"></bubble>
+	    </svg>
+  	</div>
 
-	<!-- Play button -->
+	<!-- Play button 
 	<script type="text/x-template" id="home-template">
 		<g>
 			<foreignObject x="650" y="300" width="90" height="100">				
 				<a class="button is-primary is-large is-inverted" href="#" v-on:click="play">Play</a>
 			</foreignObject>
 		</g>
-	</script>
-	<!-- Bubbles canvas -->
+	</script>-->
+	<!-- Bubbles canvas 
 	<script type="text/x-template" id="bubbles-template">
 	  <g>
 		  <foreignObject x="15" y="15" width="70" height="70">
@@ -28,7 +64,8 @@
 		  <text font-size="25" font-weight="bold" font-family="Verdana" x="75" y="50">{{score}}</text>
 	  	  <bubble v-for="count in counter" :index='count * 3' v-on:correctAnswer="increaseScore"></bubble>
 	  </g>
-	</script>
+	</script>-->
+
   	<!-- Bubble component -->
     <script type="text/x-template" id="bubble-template">
       <transition name="fade">
@@ -45,7 +82,7 @@
 	  </transition>
 	</script>
 	
-	<!-- Main canvas -->
+	<!-- Main canvas 
 	<svg id="root">
 	  <defs>
 	    <linearGradient id="grad1" x1="0%" y1="90%" x2="100%" y2="0%">
@@ -54,7 +91,7 @@
 	    </linearGradient>
 	  </defs>
 	  <component :is="currentView" v-on:play="currentView='bubbles'" ></component>
-	</svg>
+	</svg>-->
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="js/numbersense.js"></script>
