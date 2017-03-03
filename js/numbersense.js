@@ -14,12 +14,21 @@ var Bubbles = Vue.component('bubbles', {
 	data: function() {
 		return {
     		counter: [0,1,2,3,4,5,6,7,8,9],
-			score: 0
+			score: 0,
+			showResult: false
 		}
 	},
 	methods: {
 		increaseScore: function() {
 			this.score += 100;
+		},
+		playAgain: function() {
+			this.$emit('playAgain');
+		}
+	},
+	computed: {
+		result: function() {
+			return (this.score <= 900) ? "You can do better!" : "Well done! You are a genius!"; 
 		}
 	}
 })
@@ -35,6 +44,7 @@ var Bubble = Vue.component('bubble', {
 		    circleXCoordinate: Math.floor(Math.random() * 901) + 0,
 		    ans: '',
 		    showBubble: true,
+		    isCorrect: true,
 		    focus:false
 		}
 	},
@@ -74,21 +84,35 @@ var Bubble = Vue.component('bubble', {
 		calculate: function() {
 			if(this.operator == '+') {
 				if(this.num1 + this.num2 == this.ans) { this.popBubble(); }
+				else { this.wrongAnswer(); }
 			} else if(this.operator == '-') {
 				if(this.num1 - this.num2 == this.ans) { this.popBubble(); }
+				else { this.wrongAnswer(); }
 			} else if(this.operator == '*') {
 				if(this.num1 * this.num2 == this.ans) { this.popBubble(); }
+				else { this.wrongAnswer(); }
 			} else if(this.operator == '/') {
 				let quotient = this.num1 / this.num2;
 				if(quotient == this.ans || Math.ceil(quotient).toFixed(1) == this.ans || Math.ceil(quotient).toFixed(2) == this.ans) { this.popBubble(); }
+				else { this.wrongAnswer(); }
 			} else if(this.operator == '%') {
 				let percent = (this.num1 / 100) * this.num2;
 				if(percent == this.ans || Math.ceil(percent).toFixed(1) == this.ans || Math.ceil(percent).toFixed(2) == this.ans) { this.popBubble(); }
+				else { this.wrongAnswer(); }
 			}
 		},
 		popBubble: function() {
 			this.showBubble = false;
+			this.isCorrect = true;
 			this.$emit('correctAnswer');
+		},
+		wrongAnswer: function() {
+			this.ans = '';
+			this.isCorrect = false;
+		},
+		endGame: function() {
+			console.log('game over');
+			this.$emit('endGame');
 		}
 	}
 	
@@ -99,7 +123,7 @@ var Root = new Vue({
   el: '#root',
   data: {
     isPlay: false,
-    level: ''
+    level: 1
   },
   components: {
   	'bubbles': Bubbles,
