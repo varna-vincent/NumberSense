@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BubbleHead</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="css/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+  	<!-- Main Canvas -->
+  	<div id="root">
+  		<div id="outerDiv" class="container" v-if="!isPlay">
+	      <article class="box message is-primary">
+	      	<h1 class="title">Develop your number sense!!!</h1>
+	        <p class="control">
+	          <label class="radio">
+	            <input type="radio" id="beginner" value="1" v-model="level">
+	            Beginner
+	          </label>
+	          </p>
+	          <p class="control">
+	          <label class="radio">
+	            <input type="radio" id="intermediate" value="2" v-model="level">
+	            Intermediate
+	          </label>
+	          </p>
+	          <p class="control">
+	          <label class="radio">
+	            <input type="radio" id="expert" value="3" v-model="level">
+	            Expert
+	          </label>
+	        </p>
+	        <p class="control">
+	          <button class="button is-primary is-large" v-on:click="isPlay = true">Play</button>
+	        </p>
+	      </article>
+	    </div>
+	    <svg v-if="isPlay">
+	    	<bubbles :level="level" v-on:playAgain="isPlay=false"></bubbles>
+	    </svg>
+  	</div>
+	<!-- Bubbles canvas -->
+	<script type="text/x-template" id="bubbles-template">
+	  <g>
+	  	  <defs>
+	        <linearGradient id="grad1" x1="0%" y1="90%" x2="100%" y2="0%">
+	          <stop offset="20%" stop-color="#FFF" />
+	          <stop offset="70%" stop-color="#a0e3e8" />
+	        </linearGradient>
+	      </defs>
+		  <foreignObject x="15" y="15" width="70" height="70">
+		  	<img src="css/heart.png" alt="Star" height="50" width="50"></img>
+		  </foreignObject>
+		  <text font-size="25" font-weight="bold" font-family="Verdana" x="75" y="50">{{score}}</text>
+	  	  <bubble v-for="count in counter" :index='count * 3' v-on:correctAnswer="increaseScore" v-on:endGame="showResult=true" :level="level"></bubble>
+		  <text v-if="showResult" font-size="25" font-weight="bold" font-family="Verdana" x="500" y="500">{{result}}</text>
+		  <foreignObject x="500" y="600" width="70" height="70" v-if="showResult">
+		  	<button class="button is-primary is-large" v-on:click="playAgain">Play again</button>
+		  </foreignObject>
+	  </g>
+	</script>
+
+  	<!-- Bubble component -->
+    <script type="text/x-template" id="bubble-template">
+      <transition name="fade">
+	  <g v-if="showBubble" @click="focus=true">
+		  <animateTransform attributeType="XML" attributeName="transform" 
+		  type="translate" from="100, 0" to="100,-1000" dur="20s" fill="freeze" :begin="index" :onend="endGame" repeatCount="0"></animateTransform>
+		  <circle :cx="circleXCoordinate" cy="900" r="100" :class="{ correct: isCorrect, wrong: !isCorrect }"></circle>
+		  <text font-size="25" font-weight="bold" font-family="Verdana" :x="circleXCoordinate - 40" y="890">{{num1}} {{operator}} {{num2}}</text>
+		  <text font-size="25" font-weight="bold" font-family="Verdana" :x="circleXCoordinate - 70" y="920">=</text>
+		  <foreignObject :x="circleXCoordinate - 40" y="900" width="90" height="100">
+		  	<input type="text" @keyup.enter="calculate" v-model="ans" v-focus="focus" @blur="focus=false">
+		  </foreignObject>	  
+	  </g>
+	  </transition>
+	</script>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="js/numbersense.js"></script>
+  </body>
+</html>

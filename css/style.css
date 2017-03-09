@@ -1,0 +1,59 @@
+body {
+	background-image: url(bg1.jpg);
+	background-size: cover;
+	background-repeat: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#outerDiv {
+	position: absolute;
+	top: 35%;
+	left: 35%;
+}
+
+svg {
+	padding: 0px;
+	margin: 0px;
+	width: 100vw;
+	height: 100vh;
+	text-align: center;
+}
+
+circle, .correct {
+	opacity: 0.6;
+	stroke: "#FFF";
+	stroke-width: 2;
+	fill: url(#grad1);
+	fill-opacity: 0.6;
+}
+
+text {
+	fill : #FFF;
+	stroke: "#a0e3e8";
+	stroke-width: 0.5;
+}
+
+input[type=text] {
+    border: none;
+    height: 30px;
+    width: 100px;
+    border-bottom: 2px dashed #EEE;
+    background-color: transparent;
+    color: white;
+    font-size: 1.6em; 
+	font-family: "Verdana"; 
+	font-weight: bold; 
+}
+
+.wrong {
+	fill: red;
+	fill-opacity: 0.6;
+}
+
+.fade-leave-active {
+  transition: opacity .5s
+}
+.fade-leave-to {
+  opacity: 0
+}
