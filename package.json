@@ -10,7 +10,7 @@
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs",
-    "postinstall": "npm run dev"
+    "start": "npm run dev"
   },
   "dependencies": {
     "bulma": "^0.3.2",
