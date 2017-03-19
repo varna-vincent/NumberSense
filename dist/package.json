@@ -1,0 +1,10 @@
+{
+ "name": "Kingfish",
+ "version": "1.0.0",
+ "description": "Play and develop your number sense",
+ "author": "Varna Vincent",
+ "private": true,
+ "scripts": {
+   "postinstall": "npm install express"
+ }
+}
