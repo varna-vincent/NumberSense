@@ -38,9 +38,10 @@ export default {
   },
   created: function () {
     if (this.last) {
-      // setTimeout(function () {
-      this.$emit('showResult')
-      // }, this.index)
+      console.log(this.index)
+      setTimeout(function () {
+        this.showResult()
+      }.bind(this), (this.index + 20) * 1000)
     }
   },
   computed: {
@@ -70,12 +71,14 @@ export default {
     num1: function () {
       let max
       let min = 0
-      if (this.operator === '%') {
+      let number2
+      if (this.operator === '%' || this.operator === '/') {
         max = 11
       } else {
         max = 100
       }
-      return Math.floor(Math.random() * max) + min
+      number2 = Math.floor(Math.random() * max) + min
+      return (this.level === 2 && this.operator === '/') ? number2 * this.num2 : number2
     }
   },
   methods: {
