@@ -15,7 +15,8 @@
   "dependencies": {
     "bulma": "^0.3.2",
     "vue": "^2.1.10",
-    "vue-router": "^2.2.0"
+    "vue-router": "^2.2.0",
+    "webpack-merge": "^2.6.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
@@ -73,8 +74,7 @@
     "vue-template-compiler": "^2.1.10",
     "webpack": "^2.2.1",
     "webpack-dev-middleware": "^1.10.0",
-    "webpack-hot-middleware": "^2.16.1",
-    "webpack-merge": "^2.6.1"
+    "webpack-hot-middleware": "^2.16.1"
   },
   "engines": {
     "node": ">= 4.0.0",
