@@ -16,7 +16,7 @@
 <script>
 export default {
   name: 'bubble',
-  props: ['index', 'level', 'last'],
+  props: ['index', 'level'],
   data: function () {
     return {
       operators: ['+', '-', '*', '/', '%'],
@@ -37,8 +37,7 @@ export default {
     }
   },
   created: function () {
-    if (this.last) {
-      console.log(this.index)
+    if ((this.index / 3) === 9) {
       setTimeout(function () {
         this.showResult()
       }.bind(this), (this.index + 20) * 1000)
@@ -49,8 +48,10 @@ export default {
       let max = 0
       let min = 0
       if (this.level === 1) {
-        max = 2
+        max = 3
       } else if (this.level === 2) {
+        max = 2
+      } else if (this.level === 3) {
         max = 4
       } else {
         max = 5
@@ -60,7 +61,7 @@ export default {
     num2: function () {
       let max
       let min = 0
-      if (this.operator === '*' || this.operator === '/') {
+      if (this.level === 1 || this.operator === '*' || this.operator === '/') {
         max = 11
         min = 1
       } else {
@@ -72,13 +73,14 @@ export default {
       let max
       let min = 0
       let number2
-      if (this.operator === '%' || this.operator === '/') {
+      if (this.level === 1 || this.operator === '%' || this.operator === '/') {
         max = 11
       } else {
         max = 100
       }
       number2 = Math.floor(Math.random() * max) + min
-      return (this.level === 2 && this.operator === '/') ? number2 * this.num2 : number2
+      console.log(number2)
+      return (this.level === 3 && this.operator === '/') ? number2 * this.num2 : number2
     }
   },
   methods: {

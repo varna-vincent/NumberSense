@@ -10,7 +10,7 @@
       <img src="../assets/heart.png" alt="Star" height="50" width="50"></img>
     </foreignObject>
     <text font-size="25" font-weight="bold" font-family="Verdana" x="75" y="50">{{score}}</text>
-    <bubble v-for="count in counter" :index='count * 3' :level="level" :last='count === 9' v-on:showResult="showResult" v-on:correctAnswer="increaseScore"></bubble>
+    <bubble v-for="count in counter" :index='count * 3' :level="level" v-on:showResult="showResult" v-on:correctAnswer="increaseScore"></bubble>
     <g v-show="showScore">
       <foreignObject x="550" y="300" width="300" height="450">
         <div class="scoreReport">{{msg}}</div>
@@ -39,6 +39,9 @@ export default {
   methods: {
     increaseScore: function () {
       this.score += 100
+      if (this.score === 1000) {
+        this.showResult()
+      }
     },
     showResult: function () {
       switch (this.score) {
@@ -84,11 +87,15 @@ export default {
 }
 
 .l2 {
-  background: url(../assets/4.png) no-repeat center center fixed;
+  background: url(../assets/2.png) no-repeat center center fixed;
 }
 
 .l3 {
   background: url(../assets/3.png) no-repeat center center fixed;
+}
+
+.l4 {
+  background: url(../assets/4.png) no-repeat center center fixed;
 }
 
 svg {

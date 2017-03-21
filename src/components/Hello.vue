@@ -15,6 +15,10 @@
         <input type="radio" id="expert" value="3" v-model="level">
         Expert
       </label>
+      <label class="radio">
+        <input type="radio" id="expert" value="4" v-model="level">
+        Math Wiz
+      </label>
     </p>
     <p class="control">
       <router-link class="button is-primary is-large" :to="{ name: 'bubbles', params: { gameLevel: level }}" exact>Play</router-link>
