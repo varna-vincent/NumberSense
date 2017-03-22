@@ -7,7 +7,7 @@
 		  <text font-size="25" font-weight="bold" font-family="Verdana" :x="circleXCoordinate - 40" :y="circleYCoordinate - 10">{{num1}} {{operator}} {{num2}}</text>
 		  <text font-size="25" font-weight="bold" font-family="Verdana" :x="circleXCoordinate - 70" :y="circleYCoordinate + 20">=</text>
 		  <foreignObject :x="circleXCoordinate - 40" :y="circleYCoordinate" width="90" height="100">
-		  	<input type="number" @keyup.enter="calculate" v-model="ans" v-focus="focus" @blur="focus=false">
+		  	<input type="text" @keyup.enter="calculate" v-model="ans" v-focus="focus" @blur="focus=false">
 		  </foreignObject>	  
 	  </g>
 	</transition>
@@ -134,7 +134,7 @@ text {
   stroke-width: 0.5;
 }
 
-input[type=number] {
+input[type=text] {
   border: none;
   height: 30px;
   width: 100px;
