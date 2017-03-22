@@ -2,11 +2,11 @@
 	<transition name="fade">
 	  <g v-if="showBubble" @click="focus=true">
 		  <animateTransform attributeType="XML" attributeName="transform" 
-		  type="translate" from="100, 300" to="100,-1000" dur="20s" fill="freeze" :begin="index" repeatCount="0"></animateTransform>
-		  <circle :cx="circleXCoordinate" cy="900" r="100" :class="{ correct: isCorrect, wrong: !isCorrect }"></circle>
-		  <text font-size="25" font-weight="bold" font-family="Verdana" :x="circleXCoordinate - 40" y="890">{{num1}} {{operator}} {{num2}}</text>
-		  <text font-size="25" font-weight="bold" font-family="Verdana" :x="circleXCoordinate - 70" y="920">=</text>
-		  <foreignObject :x="circleXCoordinate - 40" y="900" width="90" height="100">
+		  type="translate" from="100, 300" to="100,-1100" dur="20s" fill="freeze" :begin="index" repeatCount="0"></animateTransform>
+		  <circle :cx="circleXCoordinate" :cy="circleYCoordinate" r="100" :class="{ correct: isCorrect, wrong: !isCorrect }"></circle>
+		  <text font-size="25" font-weight="bold" font-family="Verdana" :x="circleXCoordinate - 40" :y="circleYCoordinate - 10">{{num1}} {{operator}} {{num2}}</text>
+		  <text font-size="25" font-weight="bold" font-family="Verdana" :x="circleXCoordinate - 70" :y="circleYCoordinate + 20">=</text>
+		  <foreignObject :x="circleXCoordinate - 40" :y="circleYCoordinate" width="90" height="100">
 		  	<input type="text" @keyup.enter="calculate" v-model="ans" v-focus="focus" @blur="focus=false">
 		  </foreignObject>	  
 	  </g>
@@ -21,6 +21,7 @@ export default {
     return {
       operators: ['+', '-', '*', '/', '%'],
       circleXCoordinate: Math.floor(Math.random() * 901) + 0,
+      circleYCoordinate: 1000,
       ans: '',
       showBubble: true,
       focus: false,
